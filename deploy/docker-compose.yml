@@ -1,0 +1,16 @@
+version: '2.4'
+
+services:
+  postgres:
+    image: postgres
+    # Ports 5433 cuz 5432 could be used for another psql
+    ports:
+      - 5433:5432
+    volumes:
+      - ./dockervol/postgres-data:/var/lib/postgresql/data
+    environment:
+      TZ: Asia/Jakarta
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: test
+    restart: unless-stopped
