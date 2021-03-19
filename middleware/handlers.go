@@ -73,15 +73,22 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	// create an empty user of type models.User
 	var user models.User
 
-	// r.ParseForm()
-	// fmt.Println(r.FormValue("name"))
-
-	// decode the json request to user
-	err := json.NewDecoder(r.Body).Decode(&user)
-
+	r.ParseForm()
+	fmt.Println(r.FormValue("name"))
+	user.Name = r.FormValue("name")
+	// parse age
+	age, err := strconv.ParseInt(r.FormValue("age"), 10, 64)
 	if err != nil {
 		log.Panicf("Unable to decode the request body.  %v", err)
 	}
+	user.Age = age
+	user.Location = r.FormValue("location")
+
+	// // decode the json request to user
+	// err := json.NewDecoder(r.Body).Decode(&user)
+	// if err != nil {
+	// 	log.Panicf("Unable to decode the request body.  %v", err)
+	// }
 
 	// call insert user function and pass the user
 	insertID := insertUser(user)
