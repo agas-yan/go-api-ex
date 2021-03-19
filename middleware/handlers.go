@@ -217,10 +217,15 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// call the deleteUser, convert the int to int64
-	deletedRows := deleteUser(int64(id))
+	affectedRows := deleteUser(int64(id))
 
 	// format the message string
-	msg := fmt.Sprintf("User updated successfully. Total rows/record affected %v", deletedRows)
+	var msg string
+	if affectedRows == 0 {
+		msg = fmt.Sprintf("User to delete not found")
+	} else {
+		msg = fmt.Sprintf("User deleted successfully. ID User %v", id)
+	}
 
 	// format the reponse message
 	res := response{
