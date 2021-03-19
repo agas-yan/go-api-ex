@@ -13,4 +13,4 @@ https://www.enterprisedb.com/postgres-tutorials/postgresql-and-golang-tutorial
 
 Run all except go:
 - `bash run.sh` on deploy dir
-- down postgres
+- down postgres `docker-compose down`
