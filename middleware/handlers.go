@@ -84,12 +84,6 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	user.Age = age
 	user.Location = r.FormValue("location")
 
-	// // decode the json request to user
-	// err := json.NewDecoder(r.Body).Decode(&user)
-	// if err != nil {
-	// 	log.Panicf("Unable to decode the request body.  %v", err)
-	// }
-
 	// call insert user function and pass the user
 	insertID := insertUser(user)
 
