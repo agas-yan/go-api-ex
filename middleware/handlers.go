@@ -100,6 +100,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// send the response
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(res)
 }
 
@@ -125,7 +126,15 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// send the response
-	json.NewEncoder(w).Encode(user)
+	w.Header().Set("Content-Type", "application/json")
+	if user.ID == 0 {
+		res := response{
+			Message: "User not found",
+		}
+		json.NewEncoder(w).Encode(res)
+	} else {
+		json.NewEncoder(w).Encode(user)
+	}
 }
 
 // GetAllUser will return all the users
@@ -140,6 +149,7 @@ func GetAllUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// send all the users as response
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(users)
 }
 
@@ -184,6 +194,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// send the response
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(res)
 }
 
